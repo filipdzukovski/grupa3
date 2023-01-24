@@ -8,6 +8,8 @@ export const Login = () => {
     const [password,setPassword] = useState("");
     const [fieldType,setFieldType] = useState('password');
     const [selectedValue,setSelectedValue] = useState("Facebook");
+    const [comment,setComment] = useState('');
+    const [longComment,setLongComment] = useState(false);
 
     const apps = [
         {value:"Facebook",name:"Facebook"},
@@ -22,8 +24,8 @@ export const Login = () => {
     }
 
     useEffect(()=>{
-        console.log("App: " + selectedValue)
-    },[selectedValue])
+        console.log("Comment Value: " + comment)
+    },[comment])
 
     function submitForm(event){
         event.preventDefault();
@@ -48,6 +50,15 @@ export const Login = () => {
                     pratiMiIzmeni={(e)=>{setPassword(e.target.value)}}
                     smeniTipNaPole={changeFieldType}
                   />
+                  <Input
+                    tip="text"
+                    ime="comment"
+                    pisiNesto="Enter Comment"
+                    vrednost={comment}
+                    pratiMiIzmeni={(e)=>{setComment(e.target.value)}}
+                    renderTextArea={longComment}
+                    changeField={()=>{setLongComment(!longComment)}}
+                 />
                   <Dropdown elements={apps} onChange={(e)=>{setSelectedValue(e.target.value)}}/>
                   <button className='action-button'>Sign in</button>
             </form>
