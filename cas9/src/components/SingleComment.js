@@ -4,15 +4,15 @@ import { API_URL } from '../utils/constants';
 
 export const SingleComment = () => {
     
-    const {id} = useParams();
+    const {CommentId} = useParams();
     const [comment,setComment] = useState(undefined);
     
     useEffect(()=>{
-        fetch(`${API_URL}/comments/${id}`)
+        fetch(`${API_URL}/comments/${CommentId}`)
             .then(res=>res.json())
             .then(element=>setComment(element))
             .catch(err=>alert(err))
-    },[id])
+    },[CommentId])
     return(
         comment && 
         <div>

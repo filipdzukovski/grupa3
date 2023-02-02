@@ -13,7 +13,7 @@ export function App() {
 
     const [albums, setAlbums] = useState([]);
     const [photos, setPhotos] = useState([]);
-    const [selectedPhoto,setSelectedPhoto] = useState("");
+    const [selectedPhoto,setSelectedPhoto] = useState({});
 
     useEffect(() => {
         //fetch za albums
@@ -29,6 +29,13 @@ export function App() {
 
     }, [])
 
+    function deletePhoto(){
+        setPhotos([
+            ...photos.filter(item=>item.id !== selectedPhoto.id)
+        ]);
+        setSelectedPhoto({});
+    }
+
     // function setSelectedImage(photoUrl){
     //     console.log(photoUrl)
     //     setSelectedPhoto(photoUrl)
@@ -41,12 +48,12 @@ export function App() {
     return (
         <div id="app">
             <Navigation />
-            <GalleryContext.Provider value={{selectedPhoto,setSelectedPhoto}}>
+            <GalleryContext.Provider value={{selectedPhoto,setSelectedPhoto,deletePhoto}}>
             <Routes>
                 <Route path="/albums" element={<Albums listOfAlbums={albums} />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/comments" element={<Comments />} />
-                <Route path="/single-comment/:id" element={<SingleComment />} />
+                <Route path="/single-comment/:CommentId" element={<SingleComment />} />
                 <Route path="/gallery"
                  element={<Gallery
                 //  setSelectedImage={setSelectedImage}

@@ -11,13 +11,13 @@ export const Gallery = ({listOfPhotos}) => {
             {listOfPhotos.slice(0,50).map(photo=>{
                 return(
                     // onClick={()=>setSelectedImage(photo.url)}
-                    <div onClick={()=>setSelectedPhoto(photo.url)} key={photo.id} className='image-holder'>
+                    <div onClick={()=>setSelectedPhoto(photo)} key={photo.id} className='image-holder'>
                         <img src={photo.thumbnailUrl} alt={photo.title}/>
                     </div>
                 )
             })}
-
-            {selectedPhoto !== "" && <Popup/>}  {/* {selectedPhoto !== "" && <Popup imageUrl={selectedPhoto} zatvoriSlika={closePhoto}/>} */}
+            
+            {Object.keys(selectedPhoto).length > 1 && <Popup/>}  {/* {selectedPhoto !== "" && <Popup imageUrl={selectedPhoto} zatvoriSlika={closePhoto}/>} */}
            
         </div>
     )
