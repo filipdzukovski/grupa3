@@ -1,4 +1,4 @@
-import { getUsers } from './../../../api/usersApi';
+import { getUsers, removeUser } from './../../../api/usersApi';
 import actions from './actions';
 
 const fetchUsers = (requestParams) => {
@@ -15,7 +15,24 @@ const fetchUsers = (requestParams) => {
             })
     }
 }
+
+const deleteUserFromJsonPlaceholder = (requestParams) => {
+    return dispatch => {
+        dispatch(actions.deleteUserRequest(requestParams));
+        return removeUser(requestParams) //requestParams -> id-to na elem za brisenje
+            .then(result => {
+                dispatch(actions.deleteUserSuccess(result))
+                return result;
+            })
+            .catch(err => {
+                dispatch(actions.deleteUserFail(err))
+                return err;
+            })
+    }
+}
+
 // eslint-disable-next-line
 export default {
-    fetchUsers
+    fetchUsers,
+    deleteUserFromJsonPlaceholder
 }

@@ -13,9 +13,13 @@ export default function UsersContainer(){
         dispatch(operations.fetchUsers());
     },[dispatch])
 
+    function deleteUser(id){
+       dispatch(operations.deleteUserFromJsonPlaceholder(id))
+    }
+
     return(
         <div id="users-container">
-            <UsersComponent usersList={users} errorMessage={errorMessage}/>
+            <UsersComponent usersList={users} errorMessage={errorMessage} deleteUser={deleteUser}/>
         </div>
     )
 }

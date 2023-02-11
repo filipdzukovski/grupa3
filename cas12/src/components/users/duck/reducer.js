@@ -29,6 +29,23 @@ export default function reducer(state = initialState, action) {
                 errorMessage: action.payload,
                 // isLoading: false
             }
+        
+        case constants.DELETE_USERS_REQUEST:
+            return{
+                ...state
+            }
+        
+        case constants.DELETE_USERS_SUCCESS:
+            return{
+                ...state,                                           //userId
+                users: [...state.users.filter(user=> user.id !== action.payload)]
+            }
+
+        case constants.DELETE_USERS_FAIL:
+            return{
+                ...state,
+                errorMessage: action.payload
+            }
 
         default: return state;
     }
